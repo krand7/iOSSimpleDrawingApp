@@ -14,6 +14,8 @@
 		6D85337719D35C1C00D52B89 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D85337619D35C1C00D52B89 /* Images.xcassets */; };
 		6D85337A19D35C1C00D52B89 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D85337819D35C1C00D52B89 /* LaunchScreen.xib */; };
 		6D85338619D35C1C00D52B89 /* DrawingGesturesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D85338519D35C1C00D52B89 /* DrawingGesturesTests.m */; };
+		6D85339119D35C5C00D52B89 /* TouchTrackerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D85339019D35C5C00D52B89 /* TouchTrackerView.m */; };
+		6D85339419D368F300D52B89 /* ExistingPathsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D85339319D368F300D52B89 /* ExistingPathsView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		6D85337F19D35C1C00D52B89 /* DrawingGesturesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrawingGesturesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D85338419D35C1C00D52B89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D85338519D35C1C00D52B89 /* DrawingGesturesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawingGesturesTests.m; sourceTree = "<group>"; };
+		6D85338F19D35C5C00D52B89 /* TouchTrackerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchTrackerView.h; sourceTree = "<group>"; };
+		6D85339019D35C5C00D52B89 /* TouchTrackerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchTrackerView.m; sourceTree = "<group>"; };
+		6D85339219D368F300D52B89 /* ExistingPathsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingPathsView.h; sourceTree = "<group>"; };
+		6D85339319D368F300D52B89 /* ExistingPathsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingPathsView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,10 @@
 				6D85337019D35C1C00D52B89 /* ViewController.h */,
 				6D85337119D35C1C00D52B89 /* ViewController.m */,
 				6D85337319D35C1C00D52B89 /* Main.storyboard */,
+				6D85339219D368F300D52B89 /* ExistingPathsView.h */,
+				6D85339319D368F300D52B89 /* ExistingPathsView.m */,
+				6D85338F19D35C5C00D52B89 /* TouchTrackerView.h */,
+				6D85339019D35C5C00D52B89 /* TouchTrackerView.m */,
 				6D85337619D35C1C00D52B89 /* Images.xcassets */,
 				6D85337819D35C1C00D52B89 /* LaunchScreen.xib */,
 				6D85336919D35C1C00D52B89 /* Supporting Files */,
@@ -222,6 +232,8 @@
 				6D85337219D35C1C00D52B89 /* ViewController.m in Sources */,
 				6D85336F19D35C1C00D52B89 /* AppDelegate.m in Sources */,
 				6D85336C19D35C1C00D52B89 /* main.m in Sources */,
+				6D85339419D368F300D52B89 /* ExistingPathsView.m in Sources */,
+				6D85339119D35C5C00D52B89 /* TouchTrackerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

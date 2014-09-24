@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TouchTrackerView.h"
+#import "ExistingPathsView.h"
 
 @interface ViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet TouchTrackerView *touchTrackerUIView;
+@property (strong, nonatomic) IBOutlet ExistingPathsView *existingPathsUIView;
+
+@property (strong, nonatomic) NSMutableArray *storedPaths;
 
 @end
 
