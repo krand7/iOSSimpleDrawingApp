@@ -58,6 +58,8 @@
         [sender setSelected:YES];
         [self.eraseButton setSelected:NO];
     }
+    // Clear current paths from TouchTrackerView
+    [self.touchTrackerUIView clearTouchTrackerView];
 }
 
 
@@ -69,6 +71,8 @@
         [sender setSelected:YES];
         [self.drawButton setSelected:NO];
     }
+    // Clear current paths from TouchTrackerView
+    [self.touchTrackerUIView clearTouchTrackerView];
 }
 
 
@@ -76,7 +80,7 @@
 {
     if (path == nil) return NULL;
     
-    CGPathRef tapTargetPath = CGPathCreateCopyByStrokingPath(path.CGPath, NULL, fmaxf(55.0f, path.lineWidth), path.lineCapStyle, path.lineJoinStyle, path.miterLimit);
+    CGPathRef tapTargetPath = CGPathCreateCopyByStrokingPath(path.CGPath, NULL, fmaxf(10.0f, path.lineWidth), path.lineCapStyle, path.lineJoinStyle, path.miterLimit);
     if (tapTargetPath == NULL) return NULL;
     
     UIBezierPath *tapTarget = [UIBezierPath bezierPathWithCGPath:tapTargetPath];
@@ -109,11 +113,7 @@
 }
 
 
-
-
-
-
-
+#pragma mark - Helper methods
 
 
 

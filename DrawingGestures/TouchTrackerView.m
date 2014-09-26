@@ -30,7 +30,7 @@
         NSLog(@"Touched view");
         if (path) path = NULL;
         path = [UIBezierPath bezierPath];
-        path.lineWidth = 7.0f;
+        path.lineWidth = 4.0f;
         duplicatePath = [UIBezierPath bezierPath];
         duplicatePath.lineWidth = 4.0f;
         
@@ -94,6 +94,12 @@
 }
 
 
+-(void)clearTouchTrackerView
+{
+    path = NULL;
+    duplicatePath = NULL;
+    [self setNeedsDisplay];
+}
 
 
 @end

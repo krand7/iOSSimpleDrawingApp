@@ -25,4 +25,6 @@
 
 @property (weak, nonatomic) id <TouchTrackerViewDelegate> delegate;
 
+-(void)clearTouchTrackerView;
+
 @end
