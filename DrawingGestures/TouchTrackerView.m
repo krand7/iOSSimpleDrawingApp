@@ -10,18 +10,11 @@
 
 @implementation TouchTrackerView
 
--(instancetype)initWithFrame:(CGRect)frame
-{
-    if (self = [super initWithFrame:frame]) self.multipleTouchEnabled = NO;
-    return self;
-}
-
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
     [[UIColor greenColor] setStroke];
-    //    for (UIBezierPath *bezierPath in self.storedPaths) {
     [path stroke];
     [[UIColor redColor] setStroke];
     [duplicatePath stroke];
@@ -35,8 +28,9 @@
 {
     if ([self.delegate drawingIsEnabled]) {
         NSLog(@"Touched view");
+        if (path) path = NULL;
         path = [UIBezierPath bezierPath];
-        path.lineWidth = 4.0f;
+        path.lineWidth = 7.0f;
         duplicatePath = [UIBezierPath bezierPath];
         duplicatePath.lineWidth = 4.0f;
         
@@ -46,6 +40,21 @@
         CGPoint translatedPoint = [touch locationInView:self];
         [duplicatePath moveToPoint:CGPointMake(translatedPoint.x, translatedPoint.y+400)];
     }
+    
+    else if ([self.delegate erasingIsEnabled]) {
+        // Clear touchTracker view
+        path = NULL;
+        duplicatePath = NULL;
+        [self setNeedsDisplay];
+        
+        // Determine if user selected a path
+        NSLog(@"Prepared to erase bezierPath");
+        UITouch *touch = [touches anyObject];
+        CGPoint tapPoint = [touch locationInView:self];
+        [self.delegate checkForPathSelected:tapPoint];
+        
+    }
+    
 }
 
 // When user moves finger, update path
@@ -73,11 +82,6 @@
         [duplicatePath addLineToPoint:CGPointMake(translatedPoint.x, translatedPoint.y+400)];
         
         [self setNeedsDisplay];
-        //    if (!self.storedPaths) {
-        //        self.storedPaths = [[NSMutableArray alloc] init];
-        //        NSLog(@"initiated storedPath array!");
-        //    }
-        //    [self.storedPaths addObject:[path copy]];
         
         [self.delegate getNewBezierPath:path];
         [self.delegate getNewBezierPath:duplicatePath];

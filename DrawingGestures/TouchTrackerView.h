@@ -12,6 +12,8 @@
 
 -(void)getNewBezierPath:(UIBezierPath *)path;
 -(BOOL)drawingIsEnabled;
+-(BOOL)erasingIsEnabled;
+-(void)checkForPathSelected:(CGPoint)tapPoint;
 
 @end
 
