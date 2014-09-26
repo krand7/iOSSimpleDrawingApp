@@ -18,8 +18,32 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Frb-mK-6dq" customClass="TouchTrackerView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gJX-2Y-cTe">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Draw">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="177" y="37" width="47" height="30"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="drawButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="I0A-DP-2fp"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="gJX-2Y-cTe"/>
+                                    </mask>
+                                </variation>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
+                                    <mask key="subviews">
+                                        <include reference="gJX-2Y-cTe"/>
+                                    </mask>
                                 </variation>
                             </view>
                         </subviews>
@@ -36,6 +60,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="drawButton" destination="gJX-2Y-cTe" id="kEw-Y0-gH8"/>
                         <outlet property="existingPathsUIView" destination="kh9-bI-dsS" id="A1C-wa-iZy"/>
                         <outlet property="touchTrackerUIView" destination="Frb-mK-6dq" id="bFh-Ca-1BT"/>
                     </connections>

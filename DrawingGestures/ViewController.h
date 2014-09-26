@@ -10,12 +10,16 @@
 #import "TouchTrackerView.h"
 #import "ExistingPathsView.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <TouchTrackerViewDelegate>
 
 @property (strong, nonatomic) IBOutlet TouchTrackerView *touchTrackerUIView;
 @property (strong, nonatomic) IBOutlet ExistingPathsView *existingPathsUIView;
+@property (strong, nonatomic) IBOutlet UIButton *drawButton;
+
 
 @property (strong, nonatomic) NSMutableArray *storedPaths;
+
+- (IBAction)drawButtonPressed:(UIButton *)sender;
 
 @end
 

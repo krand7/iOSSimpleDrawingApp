@@ -41,4 +41,14 @@
 }
 
 
+- (IBAction)drawButtonPressed:(UIButton *)sender {
+    if ([sender isSelected]) [sender setSelected:NO];
+    else [sender setSelected:YES];
+}
+
+-(BOOL)drawingIsEnabled
+{
+    return self.drawButton.isSelected;
+}
+
 @end

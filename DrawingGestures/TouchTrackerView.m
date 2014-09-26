@@ -21,9 +21,11 @@
 - (void)drawRect:(CGRect)rect {
     // Drawing code
     [[UIColor greenColor] setStroke];
-//    for (UIBezierPath *bezierPath in self.storedPaths) {
-        [path stroke];
-
+    //    for (UIBezierPath *bezierPath in self.storedPaths) {
+    [path stroke];
+    [[UIColor redColor] setStroke];
+    [duplicatePath stroke];
+    
 }
 
 
@@ -31,37 +33,55 @@
 // When touch begins, initialize a path
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"Touched view");
-    path = [UIBezierPath bezierPath];
-    path.lineWidth = 4.0f;
-    
-    UITouch *touch = [touches anyObject];
-    [path moveToPoint:[touch locationInView:self]];
-    
+    if ([self.delegate drawingIsEnabled]) {
+        NSLog(@"Touched view");
+        path = [UIBezierPath bezierPath];
+        path.lineWidth = 4.0f;
+        duplicatePath = [UIBezierPath bezierPath];
+        duplicatePath.lineWidth = 4.0f;
+        
+        UITouch *touch = [touches anyObject];
+        [path moveToPoint:[touch locationInView:self]];
+        
+        CGPoint translatedPoint = [touch locationInView:self];
+        [duplicatePath moveToPoint:CGPointMake(translatedPoint.x, translatedPoint.y+400)];
+    }
 }
 
 // When user moves finger, update path
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
-    [path addLineToPoint:[touch locationInView:self]];
-    [self setNeedsDisplay];
+    if ([self.delegate drawingIsEnabled]) {
+        UITouch *touch = [touches anyObject];
+        [path addLineToPoint:[touch locationInView:self]];
+        
+        CGPoint translatedPoint = [touch locationInView:self];
+        [duplicatePath addLineToPoint:CGPointMake(translatedPoint.x, translatedPoint.y+400)];
+        
+        [self setNeedsDisplay];
+    }
 }
 
 // When user releases finger, still update path
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
-    [path addLineToPoint:[touch locationInView:self]];
-    [self setNeedsDisplay];
-//    if (!self.storedPaths) {
-//        self.storedPaths = [[NSMutableArray alloc] init];
-//        NSLog(@"initiated storedPath array!");
-//    }
-//    [self.storedPaths addObject:[path copy]];
-    
-    [self.delegate getNewBezierPath:path];
-    
+    if ([self.delegate drawingIsEnabled]) {
+        UITouch *touch = [touches anyObject];
+        [path addLineToPoint:[touch locationInView:self]];
+        
+        CGPoint translatedPoint = [touch locationInView:self];
+        [duplicatePath addLineToPoint:CGPointMake(translatedPoint.x, translatedPoint.y+400)];
+        
+        [self setNeedsDisplay];
+        //    if (!self.storedPaths) {
+        //        self.storedPaths = [[NSMutableArray alloc] init];
+        //        NSLog(@"initiated storedPath array!");
+        //    }
+        //    [self.storedPaths addObject:[path copy]];
+        
+        [self.delegate getNewBezierPath:path];
+        [self.delegate getNewBezierPath:duplicatePath];
+    }
 }
 
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event

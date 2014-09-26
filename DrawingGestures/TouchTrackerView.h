@@ -11,12 +11,14 @@
 @protocol TouchTrackerViewDelegate <NSObject>
 
 -(void)getNewBezierPath:(UIBezierPath *)path;
+-(BOOL)drawingIsEnabled;
 
 @end
 
 @interface TouchTrackerView : UIView
 {
     UIBezierPath *path;
+    UIBezierPath *duplicatePath;
 }
 
 @property (weak, nonatomic) id <TouchTrackerViewDelegate> delegate;
