@@ -10,6 +10,8 @@
 
 @implementation TouchTrackerView
 
+CGPoint touchPoint;
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
@@ -50,9 +52,20 @@
         // Determine if user selected a path
         NSLog(@"Prepared to erase bezierPath");
         UITouch *touch = [touches anyObject];
-        CGPoint tapPoint = [touch locationInView:self];
-        [self.delegate checkForPathSelected:tapPoint];
+        touchPoint = [touch locationInView:self];
+        [self.delegate checkForPathSelected:touchPoint];
+    }
+    
+    else if ([self.delegate translatingIsEnabled]) {
+        // Clear touchTracker view
+        path = NULL;
+        duplicatePath = NULL;
+        [self setNeedsDisplay];
         
+        // Determine if user selected a path
+        UITouch *touch = [touches anyObject];
+        touchPoint = [touch locationInView:self];
+        [self.delegate checkForPathSelected:touchPoint];
     }
     
 }
@@ -100,6 +113,16 @@
     duplicatePath = NULL;
     [self setNeedsDisplay];
 }
+
+
+
+
+
+
+
+
+
+
 
 
 @end

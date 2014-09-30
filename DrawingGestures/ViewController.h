@@ -16,12 +16,16 @@
 @property (strong, nonatomic) IBOutlet ExistingPathsView *existingPathsUIView;
 @property (strong, nonatomic) IBOutlet UIButton *drawButton;
 @property (strong, nonatomic) IBOutlet UIButton *eraseButton;
+@property (strong, nonatomic) IBOutlet UIButton *resizeButton;
+@property (strong, nonatomic) IBOutlet UIButton *translateButton;
 
 
 @property (strong, nonatomic) NSMutableArray *storedPaths;
 
 - (IBAction)drawButtonPressed:(UIButton *)sender;
 - (IBAction)eraseButtonPressed:(UIButton *)sender;
+- (IBAction)resizeButtonPressed:(UIButton *)sender;
+- (IBAction)translateButtonPressed:(UIButton *)sender;
 
 @end
 

@@ -12,13 +12,9 @@
 
 @implementation ExistingPathsView
 
-
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
     int counter = 0;
-    NSLog(@"There are now %lu paths to be drawn", [self.storedPaths count]);
     for (UIBezierPath *path in self.storedPaths) {
         // Set stroke color based on path index
         if (++counter % 2 == 0) [_RGB(255.0, 0, 0, .3) setStroke];
