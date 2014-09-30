@@ -36,11 +36,17 @@ CGPoint touchPoint;
         duplicatePath = [UIBezierPath bezierPath];
         duplicatePath.lineWidth = 4.0f;
         
+        // Find touch location
         UITouch *touch = [touches anyObject];
-        [path moveToPoint:[touch locationInView:self]];
         
-        CGPoint translatedPoint = [touch locationInView:self];
-        [duplicatePath moveToPoint:CGPointMake(translatedPoint.x, translatedPoint.y+400)];
+        if ([self.delegate determineWhichPathFromSegmentControl]==0 || [self.delegate determineWhichPathFromSegmentControl]==2) {
+            [path moveToPoint:[touch locationInView:self]];
+        }
+        
+        if ([self.delegate determineWhichPathFromSegmentControl]==1 || [self.delegate determineWhichPathFromSegmentControl]==2) {
+            CGPoint translatedPoint = [touch locationInView:self];
+            [duplicatePath moveToPoint:CGPointMake(translatedPoint.x, translatedPoint.y+400)];
+        }
     }
     
     else if ([self.delegate erasingIsEnabled]) {
@@ -75,10 +81,13 @@ CGPoint touchPoint;
 {
     if ([self.delegate drawingIsEnabled]) {
         UITouch *touch = [touches anyObject];
-        [path addLineToPoint:[touch locationInView:self]];
-        
-        CGPoint translatedPoint = [touch locationInView:self];
-        [duplicatePath addLineToPoint:CGPointMake(translatedPoint.x, translatedPoint.y+400)];
+        if ([self.delegate determineWhichPathFromSegmentControl]==0 || [self.delegate determineWhichPathFromSegmentControl]==2) {
+            [path addLineToPoint:[touch locationInView:self]];
+        }
+        if ([self.delegate determineWhichPathFromSegmentControl]==1 || [self.delegate determineWhichPathFromSegmentControl]==2) {
+            CGPoint translatedPoint = [touch locationInView:self];
+            [duplicatePath addLineToPoint:CGPointMake(translatedPoint.x, translatedPoint.y+400)];
+        }
         
         [self setNeedsDisplay];
     }
@@ -89,15 +98,17 @@ CGPoint touchPoint;
 {
     if ([self.delegate drawingIsEnabled]) {
         UITouch *touch = [touches anyObject];
-        [path addLineToPoint:[touch locationInView:self]];
-        
-        CGPoint translatedPoint = [touch locationInView:self];
-        [duplicatePath addLineToPoint:CGPointMake(translatedPoint.x, translatedPoint.y+400)];
-        
-        [self setNeedsDisplay];
+        if ([self.delegate determineWhichPathFromSegmentControl]==0 || [self.delegate determineWhichPathFromSegmentControl]==2) {
+            [path addLineToPoint:[touch locationInView:self]];
+        }
+        if ([self.delegate determineWhichPathFromSegmentControl]==1 || [self.delegate determineWhichPathFromSegmentControl]==2) {
+            CGPoint translatedPoint = [touch locationInView:self];
+            [duplicatePath addLineToPoint:CGPointMake(translatedPoint.x, translatedPoint.y+400)];
+        }
         
         [self.delegate getNewBezierPath:path];
         [self.delegate getNewBezierPath:duplicatePath];
+        [self setNeedsDisplay];
     }
 }
 

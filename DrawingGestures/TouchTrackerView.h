@@ -16,6 +16,7 @@
 -(BOOL)resizingIsEnabled;
 -(BOOL)translatingIsEnabled;
 -(void)checkForPathSelected:(CGPoint)tapPoint;
+-(int)determineWhichPathFromSegmentControl;
 
 @end
 

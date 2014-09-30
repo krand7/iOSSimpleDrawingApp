@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *resizeButton;
 @property (strong, nonatomic) IBOutlet UIButton *translateButton;
 
+@property (strong, nonatomic) IBOutlet UISegmentedControl *whichPathSegmentedControl;
 
 @property (strong, nonatomic) NSMutableArray *storedPaths;
 

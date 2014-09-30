@@ -15,6 +15,7 @@
 @implementation ViewController
 
 UIBezierPath *pathToTranslate;
+UIBezierPath *duplicatePathToTranslate;
 CGPoint shiftingPoint;
 UIPanGestureRecognizer *panRecognizer;
 
@@ -28,6 +29,12 @@ UIPanGestureRecognizer *panRecognizer;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
+
+
+
 
 #pragma mark - TouchTrackerView Delegate
 
@@ -79,26 +86,94 @@ UIPanGestureRecognizer *panRecognizer;
         }
     }
     
-    // Erase path
+    // Erase path (but really replace with empty bezierPath)
     if ([self erasingIsEnabled]) {
+        
         if (pathToEdit) {
-            [self.existingPathsUIView.storedPaths removeObject:pathToEdit];
+
+            // Only remove top copy (based on segment control)
+            if ([self.whichPathSegmentedControl selectedSegmentIndex]==0) {
+                if ([self.existingPathsUIView.storedPaths indexOfObject:pathToEdit] % 2 == 0) {
+                    [self.existingPathsUIView.storedPaths replaceObjectAtIndex:[self.existingPathsUIView.storedPaths indexOfObject:pathToEdit] withObject:[UIBezierPath bezierPath]];
+                    NSLog(@"removed top path successfully!");
+                } else NSLog(@"you can only remove the top path!");
+            }
+            
+            // Only remove bottom copy (based on segment control)
+            else if ([self.whichPathSegmentedControl selectedSegmentIndex]==1) {
+                if ([self.existingPathsUIView.storedPaths indexOfObject:pathToEdit] % 2 == 1) {
+                    [self.existingPathsUIView.storedPaths replaceObjectAtIndex:[self.existingPathsUIView.storedPaths indexOfObject:pathToEdit] withObject:[UIBezierPath bezierPath]];
+                    NSLog(@"removed top path successfully!");
+                } else NSLog(@"you can only remove the bottom path!");
+            }
+            
+            // Remove both copies (based on segment control)
+            else if ([self.whichPathSegmentedControl selectedSegmentIndex]==2) {
+                if ([self.existingPathsUIView.storedPaths indexOfObject:pathToEdit] % 2 == 0) {
+                    [self.existingPathsUIView.storedPaths replaceObjectAtIndex:[self.existingPathsUIView.storedPaths indexOfObject:pathToEdit]+1 withObject:[UIBezierPath bezierPath]];
+                    [self.existingPathsUIView.storedPaths replaceObjectAtIndex:[self.existingPathsUIView.storedPaths indexOfObject:pathToEdit] withObject:[UIBezierPath bezierPath]];
+                    NSLog(@"removed selected path and matching bottom successfully!");
+                } else {
+                    [self.existingPathsUIView.storedPaths replaceObjectAtIndex:[self.existingPathsUIView.storedPaths indexOfObject:pathToEdit]-1 withObject:[UIBezierPath bezierPath]];
+                    [self.existingPathsUIView.storedPaths replaceObjectAtIndex:[self.existingPathsUIView.storedPaths indexOfObject:pathToEdit] withObject:[UIBezierPath bezierPath]];
+                    NSLog(@"removed selected path and matching top successfully!");
+                }
+                
+            }
+            
+            // Update view
             [self.existingPathsUIView setNeedsDisplay];
-            NSLog(@"removed path successfully!");
         }
     }
     
     // Translate path
     else if ([self translatingIsEnabled]) {
         if (pathToEdit) {
-            pathToTranslate = pathToEdit;
+            
+            if ([self.whichPathSegmentedControl selectedSegmentIndex] == 0 ) {
+                if ([self.existingPathsUIView.storedPaths indexOfObject:pathToEdit] % 2 == 0) {
+                    pathToTranslate = pathToEdit;
+                    duplicatePathToTranslate = nil;
+                }
+            }
+            
+            if ([self.whichPathSegmentedControl selectedSegmentIndex] == 1 ) {
+                if ([self.existingPathsUIView.storedPaths indexOfObject:pathToEdit] % 2 == 1) {
+                    pathToTranslate = pathToEdit;
+                    duplicatePathToTranslate = nil;
+                }
+            }
+            
+            if ([self.whichPathSegmentedControl selectedSegmentIndex] == 2 ) {
+                if ([self.existingPathsUIView.storedPaths indexOfObject:pathToEdit] % 2 == 0) {
+                    pathToTranslate = pathToEdit;
+                    duplicatePathToTranslate = [self.existingPathsUIView.storedPaths objectAtIndex:[self.existingPathsUIView.storedPaths indexOfObject:pathToEdit]+1];
+                }
+                else {
+                    pathToTranslate = pathToEdit;
+                    duplicatePathToTranslate = [self.existingPathsUIView.storedPaths objectAtIndex:[self.existingPathsUIView.storedPaths indexOfObject:pathToEdit]-1];
+                }
+            }
         }
     }
     
 }
 
+-(int)determineWhichPathFromSegmentControl
+{
+    return self.whichPathSegmentedControl.selectedSegmentIndex;
+}
 
-#pragma mark - Drawing
+
+
+
+
+
+
+
+
+
+#pragma mark - Drawing methods
 
 - (IBAction)drawButtonPressed:(UIButton *)sender {
     if ([sender isSelected]) [sender setSelected:NO];
@@ -115,7 +190,16 @@ UIPanGestureRecognizer *panRecognizer;
 }
 
 
-#pragma mark - Erasing
+
+
+
+
+
+
+
+
+
+#pragma mark - Erasing methods
 
 - (IBAction)eraseButtonPressed:(UIButton *)sender {
     if ([sender isSelected]) [sender setSelected:NO];
@@ -145,6 +229,16 @@ UIPanGestureRecognizer *panRecognizer;
     
 }
 
+
+
+
+
+
+
+
+
+
+
 #pragma mark - Resize methods
 
 - (IBAction)resizeButtonPressed:(UIButton *)sender {
@@ -160,6 +254,15 @@ UIPanGestureRecognizer *panRecognizer;
     // Clear current paths from TouchTrackerView
     [self.touchTrackerUIView clearTouchTrackerView];
 }
+
+
+
+
+
+
+
+
+
 
 #pragma mark - Translate methods
 
@@ -184,11 +287,13 @@ UIPanGestureRecognizer *panRecognizer;
     [self.touchTrackerUIView clearTouchTrackerView];
 }
 
+
 -(void)translatePathWithPoint:(CGPoint)point {
     [pathToTranslate applyTransform:CGAffineTransformMake(1, 0, 0, 1, point.x, point.y)];
+    [duplicatePathToTranslate applyTransform:CGAffineTransformMake(1, 0, 0, 1, point.x, point.y)];
     [self.existingPathsUIView setNeedsDisplay];
-    NSLog(@"translated to: %f %f", point.x, point.y);
 }
+
 
 -(void)move:(UIPanGestureRecognizer *)sender
 {
@@ -205,8 +310,19 @@ UIPanGestureRecognizer *panRecognizer;
         NSLog(@"ended gesture");
         // Remove selected path
         pathToTranslate = nil;
+        duplicatePathToTranslate = nil;
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 #pragma mark - Helper methods
 
