@@ -19,10 +19,14 @@ UIBezierPath *duplicatePathToTranslate;
 CGPoint shiftingPoint;
 UIPanGestureRecognizer *panRecognizer;
 
+BOOL toolbarIsAnimating;
+BOOL toolbarIsOpen;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.touchTrackerUIView.delegate = self;
+    [self createToolbar];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -175,7 +179,7 @@ UIPanGestureRecognizer *panRecognizer;
 
 #pragma mark - Drawing methods
 
-- (IBAction)drawButtonPressed:(UIButton *)sender {
+- (void)drawButtonPressed:(UIButton *)sender {
     if ([sender isSelected]) [sender setSelected:NO];
     else {
         [sender setSelected:YES];
@@ -324,9 +328,125 @@ UIPanGestureRecognizer *panRecognizer;
 
 
 
+#pragma mark - Toolbar
+
+-(void)createButtons
+{
+    // Draw button
+    self.drawButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 50, self.buttonContainer.frame.size.height - 30)];
+    [self.drawButton addTarget:self action:@selector(drawButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.drawButton setTitle:@"Draw" forState:UIControlStateNormal];
+    self.drawButton.titleLabel.textColor = [UIColor grayColor];
+    self.drawButton.titleLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:15];
+    self.drawButton.backgroundColor = [UIColor blackColor];
+    [self.drawButton setBackgroundImage:[self imageWithColor:[UIColor orangeColor]] forState:UIControlStateSelected];
+    
+    // Erase button
+    self.eraseButton = [[UIButton alloc] initWithFrame:CGRectMake(10+self.drawButton.frame.size.width + 10, 10, 50, self.buttonContainer.frame.size.height - 30)];
+    [self.eraseButton addTarget:self action:@selector(eraseButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.eraseButton setTitle:@"Erase" forState:UIControlStateNormal];
+    self.eraseButton.titleLabel.textColor = [UIColor grayColor];
+    self.eraseButton.titleLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:15];
+    self.eraseButton.backgroundColor = [UIColor blackColor];
+    [self.eraseButton setBackgroundImage:[self imageWithColor:[UIColor orangeColor]] forState:UIControlStateSelected];
+    
+    // Resize button
+    self.resizeButton = [[UIButton alloc] initWithFrame:CGRectMake(10+self.drawButton.frame.size.width + 10 + self.eraseButton.frame.size.width + 10, 10, 50, self.buttonContainer.frame.size.height - 30)];
+    [self.resizeButton addTarget:self action:@selector(resizeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.resizeButton setTitle:@"Resize" forState:UIControlStateNormal];
+    self.resizeButton.titleLabel.textColor = [UIColor grayColor];
+    self.resizeButton.titleLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:15];
+    self.resizeButton.backgroundColor = [UIColor blackColor];
+    [self.resizeButton setBackgroundImage:[self imageWithColor:[UIColor orangeColor]] forState:UIControlStateSelected];
+    
+    // Translate button
+    self.translateButton = [[UIButton alloc] initWithFrame:CGRectMake(10+self.drawButton.frame.size.width + 10 + self.eraseButton.frame.size.width + 10 + self.resizeButton.frame.size.width + 10, 10, 60, self.buttonContainer.frame.size.height - 30)];
+    [self.translateButton addTarget:self action:@selector(translateButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.translateButton setTitle:@"Translate" forState:UIControlStateNormal];
+    self.translateButton.titleLabel.textColor = [UIColor grayColor];
+    self.translateButton.titleLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:15];
+    self.translateButton.backgroundColor = [UIColor blackColor];
+    [self.translateButton setBackgroundImage:[self imageWithColor:[UIColor orangeColor]] forState:UIControlStateSelected];
+    
+}
+
+
+-(void)createToolbar
+{
+    
+    self.toolbarContainer = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-35, self.view.frame.size.width, 100)];
+    self.toolbarContainer.backgroundColor = [UIColor clearColor];
+    [self.touchTrackerUIView addSubview:self.toolbarContainer];
+    
+    self.buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, self.toolbarContainer.frame.size.height-70, self.toolbarContainer.frame.size.width, 70)];
+    self.buttonContainer.backgroundColor = [UIColor yellowColor];
+    [self.toolbarContainer addSubview:self.buttonContainer];
+    
+    // Create buttons, then add
+    [self createButtons];
+    [self.buttonContainer addSubview:self.drawButton];
+    [self.buttonContainer addSubview:self.eraseButton];
+    [self.buttonContainer addSubview:self.resizeButton];
+    [self.buttonContainer addSubview:self.translateButton];
+    
+    // Create collapse button
+    self.collapseExpandToolbarButton = [[UIButton alloc] initWithFrame:CGRectMake(self.toolbarContainer.frame.size.width - 110, 0, 100, 30)];
+    self.collapseExpandToolbarButton.backgroundColor = [UIColor yellowColor];
+    [self.collapseExpandToolbarButton addTarget:self action:@selector(collapseExpandToolbarButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.collapseExpandToolbarButton setTitle:@"Annotate" forState:UIControlStateNormal];
+    self.collapseExpandToolbarButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+    [self.toolbarContainer addSubview:self.collapseExpandToolbarButton];
+    
+}
+
+-(void)collapseExpandToolbarButtonPressed
+{
+    NSLog(@"selector is working...");
+    if (!toolbarIsAnimating) {
+        if (toolbarIsOpen) [self collapseToolbar];
+        else [self expandToolbar];
+    }
+}
+
+-(void)collapseToolbar
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.toolbarContainer setFrame:CGRectMake(0, (self.view.frame.size.height - 35), self.view.frame.size.width, 100.0)];
+    } completion:^(BOOL finished) {
+        toolbarIsOpen = NO;
+        toolbarIsAnimating = NO;
+        [self.collapseExpandToolbarButton setTitle:@"\u2B06" forState:UIControlStateNormal];
+    }];
+}
+
+-(void)expandToolbar
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.toolbarContainer setFrame:CGRectMake(0, self.view.frame.size.height-90, self.view.frame.size.width, 100)];
+    } completion:^(BOOL finished) {
+        toolbarIsAnimating = NO;
+        toolbarIsOpen = YES;
+        [self.collapseExpandToolbarButton setTitle:@"\u2B07" forState:UIControlStateNormal];
+    }];
+}
+
+
+
 #pragma mark - Helper methods
 
-
+- (UIImage *)imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
 
 
 @end

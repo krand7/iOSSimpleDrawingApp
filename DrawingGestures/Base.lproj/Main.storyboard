@@ -19,62 +19,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Frb-mK-6dq" customClass="TouchTrackerView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gJX-2Y-cTe">
-                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="Draw">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="218" y="62" width="75" height="30"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="drawButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="I0A-DP-2fp"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ioV-Sb-8uc">
-                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="Erase">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="218" y="93" width="75" height="30"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="eraseButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ZwI-6n-a9h"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yLu-XY-2LK">
-                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="Resize">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="218" y="124" width="75" height="30"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="resizeButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="r0Z-Ak-mRn"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sO3-Xq-AZd">
-                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="Translate">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="218" y="155" width="75" height="30"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="translateButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5EY-68-dO4"/>
-                                        </connections>
-                                    </button>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="bse-0l-xD5">
                                         <rect key="frame" x="-61" y="-14" width="123" height="29"/>
                                         <segments>
@@ -90,20 +34,12 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <variation key="default">
                                     <mask key="subviews">
-                                        <exclude reference="gJX-2Y-cTe"/>
-                                        <exclude reference="ioV-Sb-8uc"/>
-                                        <exclude reference="yLu-XY-2LK"/>
-                                        <exclude reference="sO3-Xq-AZd"/>
                                         <exclude reference="bse-0l-xD5"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
                                     <mask key="subviews">
-                                        <include reference="gJX-2Y-cTe"/>
-                                        <include reference="ioV-Sb-8uc"/>
-                                        <include reference="yLu-XY-2LK"/>
-                                        <include reference="sO3-Xq-AZd"/>
                                         <include reference="bse-0l-xD5"/>
                                     </mask>
                                 </variation>
@@ -122,12 +58,8 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="drawButton" destination="gJX-2Y-cTe" id="kEw-Y0-gH8"/>
-                        <outlet property="eraseButton" destination="ioV-Sb-8uc" id="NdZ-Ea-08E"/>
                         <outlet property="existingPathsUIView" destination="kh9-bI-dsS" id="A1C-wa-iZy"/>
-                        <outlet property="resizeButton" destination="yLu-XY-2LK" id="50o-H1-03a"/>
                         <outlet property="touchTrackerUIView" destination="Frb-mK-6dq" id="bFh-Ca-1BT"/>
-                        <outlet property="translateButton" destination="sO3-Xq-AZd" id="Xpn-K0-4hU"/>
                         <outlet property="whichPathSegmentedControl" destination="bse-0l-xD5" id="BtL-ur-57r"/>
                     </connections>
                 </viewController>
