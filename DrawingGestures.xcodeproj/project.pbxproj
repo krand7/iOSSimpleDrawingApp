@@ -16,6 +16,10 @@
 		6D85338619D35C1C00D52B89 /* DrawingGesturesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D85338519D35C1C00D52B89 /* DrawingGesturesTests.m */; };
 		6D85339119D35C5C00D52B89 /* TouchTrackerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D85339019D35C5C00D52B89 /* TouchTrackerView.m */; };
 		6D85339419D368F300D52B89 /* ExistingPathsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D85339319D368F300D52B89 /* ExistingPathsView.m */; };
+		6D85345E19E5CEBB00D52B89 /* appbar.arrow.expand.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D85345D19E5CEBB00D52B89 /* appbar.arrow.expand.png */; };
+		6D85346019E5CECC00D52B89 /* appbar.cursor.move.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D85345F19E5CECC00D52B89 /* appbar.cursor.move.png */; };
+		6D85346219E5CEF200D52B89 /* appbar.draw.marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D85346119E5CEF200D52B89 /* appbar.draw.marker.png */; };
+		6D85346419E5CF0E00D52B89 /* appbar.delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D85346319E5CF0E00D52B89 /* appbar.delete.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +50,10 @@
 		6D85339019D35C5C00D52B89 /* TouchTrackerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchTrackerView.m; sourceTree = "<group>"; };
 		6D85339219D368F300D52B89 /* ExistingPathsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingPathsView.h; sourceTree = "<group>"; };
 		6D85339319D368F300D52B89 /* ExistingPathsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingPathsView.m; sourceTree = "<group>"; };
+		6D85345D19E5CEBB00D52B89 /* appbar.arrow.expand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appbar.arrow.expand.png; sourceTree = "<group>"; };
+		6D85345F19E5CECC00D52B89 /* appbar.cursor.move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appbar.cursor.move.png; sourceTree = "<group>"; };
+		6D85346119E5CEF200D52B89 /* appbar.draw.marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appbar.draw.marker.png; sourceTree = "<group>"; };
+		6D85346319E5CF0E00D52B89 /* appbar.delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appbar.delete.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +114,10 @@
 		6D85336919D35C1C00D52B89 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6D85346319E5CF0E00D52B89 /* appbar.delete.png */,
+				6D85346119E5CEF200D52B89 /* appbar.draw.marker.png */,
+				6D85345F19E5CECC00D52B89 /* appbar.cursor.move.png */,
+				6D85345D19E5CEBB00D52B89 /* appbar.arrow.expand.png */,
 				6D85336A19D35C1C00D52B89 /* Info.plist */,
 				6D85336B19D35C1C00D52B89 /* main.m */,
 			);
@@ -210,8 +222,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D85337519D35C1C00D52B89 /* Main.storyboard in Resources */,
+				6D85346419E5CF0E00D52B89 /* appbar.delete.png in Resources */,
 				6D85337A19D35C1C00D52B89 /* LaunchScreen.xib in Resources */,
+				6D85346019E5CECC00D52B89 /* appbar.cursor.move.png in Resources */,
+				6D85346219E5CEF200D52B89 /* appbar.draw.marker.png in Resources */,
 				6D85337719D35C1C00D52B89 /* Images.xcassets in Resources */,
+				6D85345E19E5CEBB00D52B89 /* appbar.arrow.expand.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +440,7 @@
 				6D85338B19D35C1C00D52B89 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D85338C19D35C1C00D52B89 /* Build configuration list for PBXNativeTarget "DrawingGesturesTests" */ = {
 			isa = XCConfigurationList;
@@ -432,6 +449,7 @@
 				6D85338E19D35C1C00D52B89 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

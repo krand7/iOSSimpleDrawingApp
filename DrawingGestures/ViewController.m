@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+#define _RGB(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+
 @interface ViewController ()
 
 @end
@@ -335,38 +337,42 @@ BOOL toolbarIsOpen;
     // Draw button
     self.drawButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 50, self.buttonContainer.frame.size.height - 30)];
     [self.drawButton addTarget:self action:@selector(drawButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.drawButton setTitle:@"Draw" forState:UIControlStateNormal];
-    self.drawButton.titleLabel.textColor = [UIColor grayColor];
-    self.drawButton.titleLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:15];
+//    [self.drawButton setTitle:@"Draw" forState:UIControlStateNormal];
+//    self.drawButton.titleLabel.textColor = [UIColor grayColor];
+//    self.drawButton.titleLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:15];
     self.drawButton.backgroundColor = [UIColor blackColor];
-    [self.drawButton setBackgroundImage:[self imageWithColor:[UIColor orangeColor]] forState:UIControlStateSelected];
+    [self.drawButton setBackgroundImage:[self imageWithColor:_RGB(200, 100, 0, .8)] forState:UIControlStateSelected];
+    [self.drawButton setImage:[UIImage imageNamed:@"appbar.draw.marker.png"] forState:UIControlStateNormal];
     
     // Erase button
     self.eraseButton = [[UIButton alloc] initWithFrame:CGRectMake(10+self.drawButton.frame.size.width + 10, 10, 50, self.buttonContainer.frame.size.height - 30)];
     [self.eraseButton addTarget:self action:@selector(eraseButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.eraseButton setTitle:@"Erase" forState:UIControlStateNormal];
-    self.eraseButton.titleLabel.textColor = [UIColor grayColor];
-    self.eraseButton.titleLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:15];
+//    [self.eraseButton setTitle:@"Erase" forState:UIControlStateNormal];
+//    self.eraseButton.titleLabel.textColor = [UIColor grayColor];
+//    self.eraseButton.titleLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:15];
     self.eraseButton.backgroundColor = [UIColor blackColor];
-    [self.eraseButton setBackgroundImage:[self imageWithColor:[UIColor orangeColor]] forState:UIControlStateSelected];
+    [self.eraseButton setBackgroundImage:[self imageWithColor:_RGB(200, 100, 0, .8)] forState:UIControlStateSelected];
+    [self.eraseButton setImage:[UIImage imageNamed:@"appbar.delete.png"] forState:UIControlStateNormal];
     
     // Resize button
     self.resizeButton = [[UIButton alloc] initWithFrame:CGRectMake(10+self.drawButton.frame.size.width + 10 + self.eraseButton.frame.size.width + 10, 10, 50, self.buttonContainer.frame.size.height - 30)];
     [self.resizeButton addTarget:self action:@selector(resizeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.resizeButton setTitle:@"Resize" forState:UIControlStateNormal];
-    self.resizeButton.titleLabel.textColor = [UIColor grayColor];
-    self.resizeButton.titleLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:15];
+//    [self.resizeButton setTitle:@"Resize" forState:UIControlStateNormal];
+//    self.resizeButton.titleLabel.textColor = [UIColor grayColor];
+//    self.resizeButton.titleLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:15];
     self.resizeButton.backgroundColor = [UIColor blackColor];
-    [self.resizeButton setBackgroundImage:[self imageWithColor:[UIColor orangeColor]] forState:UIControlStateSelected];
+    [self.resizeButton setBackgroundImage:[self imageWithColor:_RGB(200, 100, 0, .8)] forState:UIControlStateSelected];
+    [self.resizeButton setImage:[UIImage imageNamed:@"appbar.arrow.expand.png"] forState:UIControlStateNormal];
     
     // Translate button
     self.translateButton = [[UIButton alloc] initWithFrame:CGRectMake(10+self.drawButton.frame.size.width + 10 + self.eraseButton.frame.size.width + 10 + self.resizeButton.frame.size.width + 10, 10, 60, self.buttonContainer.frame.size.height - 30)];
     [self.translateButton addTarget:self action:@selector(translateButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.translateButton setTitle:@"Translate" forState:UIControlStateNormal];
-    self.translateButton.titleLabel.textColor = [UIColor grayColor];
-    self.translateButton.titleLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:15];
+//    [self.translateButton setTitle:@"Translate" forState:UIControlStateNormal];
+//    self.translateButton.titleLabel.textColor = [UIColor grayColor];
+//    self.translateButton.titleLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:15];
     self.translateButton.backgroundColor = [UIColor blackColor];
-    [self.translateButton setBackgroundImage:[self imageWithColor:[UIColor orangeColor]] forState:UIControlStateSelected];
+    [self.translateButton setBackgroundImage:[self imageWithColor:_RGB(200, 100, 0, .8)] forState:UIControlStateSelected];
+    [self.translateButton setImage:[UIImage imageNamed:@"appbar.cursor.move.png"] forState:UIControlStateNormal];
     
 }
 
@@ -379,7 +385,7 @@ BOOL toolbarIsOpen;
     [self.touchTrackerUIView addSubview:self.toolbarContainer];
     
     self.buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, self.toolbarContainer.frame.size.height-70, self.toolbarContainer.frame.size.width, 70)];
-    self.buttonContainer.backgroundColor = [UIColor yellowColor];
+    self.buttonContainer.backgroundColor = _RGB(50, 50, 50, .7);
     [self.toolbarContainer addSubview:self.buttonContainer];
     
     // Create buttons, then add
@@ -391,7 +397,7 @@ BOOL toolbarIsOpen;
     
     // Create collapse button
     self.collapseExpandToolbarButton = [[UIButton alloc] initWithFrame:CGRectMake(self.toolbarContainer.frame.size.width - 110, 0, 100, 30)];
-    self.collapseExpandToolbarButton.backgroundColor = [UIColor yellowColor];
+    self.collapseExpandToolbarButton.backgroundColor = _RGB(50, 50, 50, .7);
     [self.collapseExpandToolbarButton addTarget:self action:@selector(collapseExpandToolbarButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.collapseExpandToolbarButton setTitle:@"Annotate" forState:UIControlStateNormal];
     self.collapseExpandToolbarButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
